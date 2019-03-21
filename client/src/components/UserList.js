@@ -13,7 +13,7 @@ export default class UserList extends Component {
       .get("https://aa-lambdablogs.herokuapp.com/api/users")
       .then(res => {
         console.log(res.data);
-        this.setState({ users: res.data.users });
+        this.setState({ users: res.data });
       })
       .catch(err => {
         console.log(err);
