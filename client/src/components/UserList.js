@@ -10,7 +10,7 @@ export default class UserList extends Component {
 
   componentDidMount = () => {
     axios
-      .get("http://localhost:4000/api/users")
+      .get("https://aa-lambdablogs.herokuapp.com/api/users")
       .then(res => {
         console.log(res.data);
         this.setState({ users: res.data });

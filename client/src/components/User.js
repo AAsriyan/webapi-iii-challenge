@@ -24,17 +24,21 @@ export default class User extends React.Component {
   }
 
   fetchUser = id => {
-    axios.get(`http://localhost:4000/api/users/${id}`).then(res => {
-      console.log(res.data);
-      this.setState({ user: res.data });
-    });
+    axios
+      .get(`https://aa-lambdablogs.herokuapp.com/api/users/${id}`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ user: res.data });
+      });
   };
 
   fetchPost = id => {
-    axios.get(`http://localhost:4000/api/users/${id}/posts`).then(res => {
-      console.log(res.data);
-      this.setState({ posts: res.data });
-    });
+    axios
+      .get(`https://aa-lambdablogs.herokuapp.com/api/users/${id}/posts`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ posts: res.data });
+      });
   };
 
   render() {
