@@ -16,8 +16,8 @@ server.use("/api/posts", postRouter);
 
 server.get("/", (req, res) => {
   res.send(`
-    <h2>Lambda Hubs API</h2>
-    <p>Welcome to the Lambda Hubs API</p>
+    <h2>Lambda Blog API</h2>
+    <p>Welcome to the Lambda Blog API</p>
     `);
 });
 
