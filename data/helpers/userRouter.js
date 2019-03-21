@@ -2,6 +2,7 @@ const express = require("express");
 
 const Users = require("./userDb");
 const Posts = require("./postDb");
+const upperCaseName = require("../middleware/upperCaseName.js");
 
 const userRouter = express.Router();
 
@@ -16,11 +17,8 @@ userRouter.get("/", async (req, res) => {
   }
 });
 
-userRouter.post("/", async (req, res) => {
-  const user = await Users.insert({
-    ...req.body,
-    name: req.body.name.toUpperCase()
-  });
+userRouter.post("/", upperCaseName, async (req, res) => {
+  const user = await Users.insert(req.body);
 
   const userInfo = req.body;
   console.log(user);
@@ -100,14 +98,15 @@ userRouter.delete("/:id", async (req, res) => {
   }
 });
 
-userRouter.put("/:id", async (req, res) => {
+userRouter.put("/:id", upperCaseName, async (req, res) => {
   try {
     const { name } = req.body;
     const { id } = req.params;
-    const user = await Users.update(id, {
-      ...req.body,
-      name: name.toUpperCase()
-    });
+    // const user = await Users.update(id, {
+    //   ...req.body,
+    //   name: name.toUpperCase()
+    // });
+    const user = await Users.update(id, req.body);
 
     if (!user) {
       res.status(404).json({
@@ -118,7 +117,7 @@ userRouter.put("/:id", async (req, res) => {
         errorMessage: "Please provide a name for this user"
       });
     } else {
-      res.status(200).json({ ...user, name: name.toUpperCase() });
+      res.status(200).json(user);
     }
   } catch (error) {
     res.status(500).json({
